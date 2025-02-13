@@ -3,27 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My wesbefs\sd... website!</title>
+    <title>Worst Portfolio</title>
     <style>
         body {
-            font-family: Comic Sans MS, sans-serif;
-            background: linear-gradient(45deg, red, yellow);
+            font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #f0f0f0, #dcdcdc);
             color: black;
             overflow: hidden;
         }
         #menu {
             position: fixed;
-            left: -250px;
+            left: 0;
             top: 0;
             width: 250px;
             height: 100vh;
-            background: purple;
+            background: #333;
             color: white;
             padding: 20px;
-            transition: left 0.3s;
+            overflow-y: auto;
         }
-        #menu:hover {
-            left: 0;
+        .submenu-toggle {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: white;
+            background: darkred;
+            padding: 5px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .submenu {
             margin-left: 20px;
@@ -53,25 +60,42 @@
         #projects a {
             display: block;
             margin-top: 10px;
+            text-decoration: none;
+            color: black;
+            background: lightgray;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        #search {
+            margin-top: 20px;
+            padding: 5px;
+            width: 100%;
         }
     </style>
 </head>
 <body>
     <div id="menu">
         <h3>Menu</h3>
-        <div class="submenu-toggle">Tab 1</div>
+        <input type="text" id="search" placeholder="Search...">
+        <a class="submenu-toggle" href="#">Tab 1</a>
         <div class="submenu">
-            <div class="submenu-toggle">Another tab</div>
+            <a class="submenu-toggle" href="#">Another tab</a>
             <div class="submenu">
-                <div class="submenu-toggle">Yet another one</div>
+                <a class="submenu-toggle" href="#">Yet another one</a>
                 <div class="submenu">
-                    <div class="submenu-toggle">It never ends</div>
+                    <a class="submenu-toggle" href="#">It never ends</a>
                 </div>
             </div>
         </div>
+        <a class="submenu-toggle" href="#">Random stuff</a>
+        <div class="submenu">
+            <a href="#">Mystery link</a>
+            <a href="#">Absolutely nothing</a>
+            <a href="#">Hidden treasure</a>
+        </div>
     </div>
 
-    <div id="about">About Me (Catch me!)</div>
+    <div id="about">About Me</div>
     
     <div id="projects">
         <h2>Projects</h2>
@@ -88,6 +112,28 @@
         document.getElementById('about').addEventListener('mouseover', function() {
             this.style.top = Math.random() * 80 + 'vh';
             this.style.left = Math.random() * 80 + 'vw';
+        });
+
+        document.getElementById('about').addEventListener('click', function() {
+            let confirmed = confirm("Are you sure you want to enter?");
+            if (!confirmed) return;
+            confirmed = confirm("Really sure?");
+            if (!confirmed) return;
+            let answer = prompt("What is 2+2?");
+            if (answer !== "4") {
+                alert("Wrong! Try again later.");
+                return;
+            }
+            document.body.innerHTML = '<h1>Welcome to my world</h1><div id="loading-photo"></div>';
+        });
+
+        document.getElementById('search').addEventListener('input', function(event) {
+            let value = event.target.value;
+            if (value.length > 5) {
+                event.target.value = "Error";
+            } else {
+                event.target.value = value.split('').sort(() => 0.5 - Math.random()).join('');
+            }
         });
     </script>
 </body>
