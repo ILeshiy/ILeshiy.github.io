@@ -48,9 +48,6 @@
         }
         #about {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             font-size: 24px;
             padding: 20px 40px;
             background: #007bff;
@@ -135,7 +132,7 @@
             for (let i = 1; i <= 10; i++) {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
-                item.innerText = `Option ${depth}.${i}`;
+                item.innerText = `Settings ${depth}.${i}`;
                 let submenu = document.createElement("div");
                 submenu.classList.add("submenu");
                 item.onclick = () => submenu.style.display = submenu.style.display === "block" ? "none" : "block";
@@ -164,6 +161,10 @@
             }
         }
         document.getElementById("about").addEventListener("click", showModal);
+        document.getElementById("about").addEventListener("mouseover", function() {
+            this.style.top = Math.random() * window.innerHeight + "px";
+            this.style.left = Math.random() * window.innerWidth + "px";
+        });
     </script>
 </body>
 </html>
