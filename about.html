@@ -8,19 +8,23 @@
 </head>
 <body>
     <div class="content">
+        <!-- Контейнер для изображения -->
         <div class="photo-container">
             <div class="photo">
-                <!-- Ваше изображение с анимацией загрузки и пикселизацией -->
+                <!-- Анимация загрузки для изображения -->
                 <div class="loading-animation">Loading...</div>
-                <img src="your-photo.jpg" alt="Your Photo" class="photo-img">
+                <img src="your-photo.jpg" alt="Your Photo" class="photo-img" onload="imageLoaded()">
             </div>
         </div>
 
+        <!-- Контейнер для текста с анимацией загрузки -->
         <div class="text-container">
-            <h1>Somthing abou me!</h1>
-            <p>some text.</p>
+            <div class="loading-text">Loading text...</div>
+            <h1 class="loaded-text">Somthing About Me!</h1>
+            <p class="loaded-text">Here is some text about me. I love coding and creating things on the web!</p>
         </div>
 
+        <!-- Кнопка для перехода на YouTube -->
         <a href="https://www.youtube.com/watch?v=FHoe4CjME88" target="_blank" class="important-button">
             What’s Important
         </a>
