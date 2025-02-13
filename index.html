@@ -3,17 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome</title>
+    <title>Worst Portfolio</title>
     <style>
         body {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            background: #111;
-            color: white;
             font-family: Arial, sans-serif;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            color: black;
+            margin: 0;
+            padding: 0;
+        }
+        #menu {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: #343a40;
+            color: white;
+            padding: 20px;
+            overflow-y: auto;
+        }
+        .menu-item {
+            cursor: pointer;
+            padding: 10px;
+            background: #495057;
+            margin-top: 5px;
+            border-radius: 5px;
+        }
+        .submenu {
+            display: none;
+            margin-left: 20px;
+        }
+        .menu-item:hover {
+            background: #6c757d;
+        }
+        #about {
+            position: absolute;
+            font-size: 24px;
+            padding: 20px 40px;
+            background: #007bff;
+            color: white;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #about:hover {
+            background: #0056b3;
+        }
+        .hidden-section {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
         }
         .loading-circle {
             width: 150px;
@@ -50,20 +94,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            overflow: hidden;
             font-size: 18px;
             color: red;
-        }
-        .loading-text::before {
-            content: 'Error 404...\A Error 500...\A Unknown Error...';
-            white-space: pre-wrap;
-            animation: error-animation 3s infinite;
-        }
-        @keyframes error-animation {
-            0% { content: 'Error 404...'; }
-            50% { content: 'Error 500...'; }
-            100% { content: 'Unknown Error...'; }
         }
         .important-link {
             display: block;
@@ -81,8 +113,19 @@
     </style>
 </head>
 <body>
-    <div class="loading-circle"></div>
-    <div class="loading-text"></div>
-    <a href="YOUR_LINK_HERE" class="important-link">Something Important</a>
+    <div id="menu">
+        <h3>Menu</h3>
+        <div class="menu-item" id="about">About Me</div>
+    </div>
+    <div class="hidden-section" id="about-section">
+        <div class="loading-circle"></div>
+        <div class="loading-text">Error 404...</div>
+        <a href="https://www.youtube.com/watch?v=FHoe4CjME88" class="important-link">Something Important</a>
+    </div>
+    <script>
+        document.getElementById("about").addEventListener("click", function() {
+            document.getElementById("about-section").style.display = "block";
+        });
+    </script>
 </body>
 </html>
