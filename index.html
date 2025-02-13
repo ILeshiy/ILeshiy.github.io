@@ -127,36 +127,35 @@
     </div>
     
     <script>
-        // Список случайных названий для меню
-        const randomMenuItems = [
-            "404 Error - Page Not Found", 
-            "Please Wait... Loading...", 
-            "Settings (Coming Soon)",
-            "System Alert", 
-            "Contact Support (Unavailable)", 
-            "Unavailable Feature", 
-            "Oops! Something Went Wrong", 
-            "Undefined Behavior", 
-            "Access Denied", 
-            "Download Now (But it won't work)", 
-            "Click Here (Nothing Happens)", 
-            "Emergency Shutdown", 
-            "Under Maintenance", 
-            "Try Again Later", 
-            "404 Redirect Loop"
+        // Список полезных названий для начальных уровней
+        const usefulItems = [
+            "Dashboard", "Settings", "User Profile", "Notifications", "Privacy", "Help Center", 
+            "Support", "Documentation", "Tools", "Search"
         ];
 
-        // Функция для генерации случайных элементов в меню
+        // Список странных и нелепых названий для глубже уровней
+        const weirdItems = [
+            "404 Error - Page Not Found", "Try Again Later", "Broken Link", 
+            "Contact Support (Unavailable)", "Click Here (Nothing Happens)", 
+            "Page Under Construction", "System Crashed", "404 Redirect Loop", 
+            "Internal Error - Try Again", "Warning: Data Loss"
+        ];
+
+        // Функция для генерации меню с разными уровнями сложности
         function generateMenu(parent, depth) {
             if (depth > 6) return;
+
             let categories = [];
             
-            // Генерация случайных названий для текущего уровня
-            for (let i = 0; i < 5; i++) {
-                categories.push(randomMenuItems[Math.floor(Math.random() * randomMenuItems.length)]);
+            // Если на первом уровне, используем полезные названия
+            if (depth === 1) {
+                categories = usefulItems;
+            } else {
+                // На следующих уровнях используем странные или нелепые названия
+                categories = weirdItems;
             }
-            
-            // Создание элементов меню с случайными названиями
+
+            // Создание элементов меню с уникальными названиями
             categories.forEach(category => {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
