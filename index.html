@@ -37,6 +37,15 @@
         .menu-item:hover {
             background: #6c757d;
         }
+        .submenu a {
+            display: block;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+        }
+        .submenu a:hover {
+            text-decoration: underline;
+        }
         #about {
             position: absolute;
             font-size: 24px;
@@ -51,80 +60,125 @@
         #about:hover {
             background: #0056b3;
         }
-        .hidden-section {
+        #projects a {
+            display: block;
+            margin-top: 10px;
+            text-decoration: none;
+            color: black;
+            background: #dee2e6;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        #projects a:hover {
+            background: #ced4da;
+        }
+        #search {
+            margin-top: 20px;
+            padding: 5px;
+            width: 100%;
+            border: 1px solid #495057;
+            border-radius: 5px;
+        }
+        .modal {
             display: none;
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            text-align: center;
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 1000;
         }
-        .loading-circle {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .loading-circle::after {
-            content: '';
-            width: 100%;
-            height: 100%;
-            position: absolute;
+        .overlay {
+            display: none;
+            position: fixed;
             top: 0;
             left: 0;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            animation: loading 1.5s infinite;
-        }
-        @keyframes loading {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .loading-text {
-            width: 200px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(5px);
-            margin-top: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-            color: red;
-        }
-        .important-link {
-            display: block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            background: red;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background 0.3s;
-        }
-        .important-link:hover {
-            background: darkred;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
     </style>
 </head>
 <body>
     <div id="menu">
         <h3>Menu</h3>
-        <div class="menu-item" id="about">About Me</div>
+        <input type="text" id="search" placeholder="Search...">
+        <div id="menu-content"></div>
     </div>
-    <div class="hidden-section" id="about-section">
-        <div class="loading-circle"></div>
-        <div class="loading-text">Error 404...</div>
-        <a href="https://www.youtube.com/watch?v=FHoe4CjME88" class="important-link">Something Important</a>
+    
+    <div id="about">About Me</div>
+    
+    <div id="projects">
+        <h2>Projects</h2>
+        <a href="https://en.wikipedia.org/wiki/Special:Random">My Project 1</a>
     </div>
+    
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <p id="modal-text"></p>
+        <button onclick="nextModalStep()">OK</button>
+    </div>
+    
     <script>
-        document.getElementById("about").addEventListener("click", function() {
-            document.getElementById("about-section").style.display = "block";
+        const menuLevels = [
+            ["Dashboard", "Settings", "User Profile", "Notifications", "Privacy", "Help Center", "Support", "Documentation", "Tools", "Search"],
+            ["Reports", "Analytics", "Integrations", "API Keys", "Security", "Billing", "Subscription", "Developers", "Logs", "System Status"],
+            ["Advanced Settings", "Beta Features", "Experimental", "Hidden Options", "Legacy Mode", "Deprecated APIs", "Something Cool", "Debug Mode", "Secret Menu", "Mystery Settings"],
+            ["Glitch Mode", "Easter Egg", "404 Lab", "Lost & Found", "Error Generator", "Infinite Loop", "Recursive Settings", "Quantum Config", "Ghost Button", "Shady Business"],
+            ["???", "404 Not Found", "Click at Your Own Risk", "Nothing to See Here", "Undefined Behavior", "The Void", "Recursive Recursion", "Forbidden Zone", "Imaginary Feature", "Portal to Nowhere"],
+            ["Blue Screen of Death", "This is Fine", "Quantum Entanglement", "404: Mind Not Found", "You Weren't Supposed to Click This", "Server is Crying", "Abandon Hope", "Why Are You Here?", "Oops", "Delete the Internet"]
+        ];
+
+        function generateMenu(parent, depth) {
+            if (depth > menuLevels.length) return;
+            
+            let categories = menuLevels[depth - 1] || ["Something Went Wrong"];
+            
+            categories.forEach(category => {
+                let item = document.createElement("div");
+                item.classList.add("menu-item");
+                item.innerText = category;
+                let submenu = document.createElement("div");
+                submenu.classList.add("submenu");
+                item.onclick = () => submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+                parent.appendChild(item);
+                parent.appendChild(submenu);
+                generateMenu(submenu, depth + 1);
+            });
+        }
+
+        generateMenu(document.getElementById("menu-content"), 1);
+        
+        let modalSteps = ["Are you sure you want to enter?", "Really sure?", "What is 2+2? (Type '4')"];
+        let modalIndex = 0;
+        function showModal() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("modal").style.display = "block";
+            document.getElementById("modal-text").innerText = modalSteps[modalIndex];
+            setTimeout(() => document.getElementById("modal").style.display = "block", 200);
+        }
+        function nextModalStep() {
+            modalIndex++;
+            if (modalIndex >= modalSteps.length) {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("modal").style.display = "none";
+                document.body.innerHTML = '<h1>Welcome to my world</h1>';
+            } else {
+                document.getElementById("modal-text").innerText = modalSteps[modalIndex];
+            }
+        }
+
+        document.getElementById("about").addEventListener("click", showModal);
+        document.getElementById("about").addEventListener("mouseover", function() {
+            setTimeout(() => {
+                this.style.top = Math.random() * window.innerHeight + "px";
+                this.style.left = Math.random() * window.innerWidth + "px";
+            }, 300);
         });
     </script>
 </body>
