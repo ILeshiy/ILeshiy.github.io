@@ -127,26 +127,36 @@
     </div>
     
     <script>
-        // Список случайных слов для меню
-        const randomWords = [
-            "Quantum", "Nebula", "Vertex", "Orbit", "Cosmic", "Binary", "Pixel", "Nexus", 
-            "Fusion", "Eclipse", "Vortex", "Prism", "Matrix", "Cipher", "Spectrum", "Pulsar", 
-            "Element", "Gravity", "Pulse", "Ion", "Nova", "Helix", "Zenith", "Solar", "Wave", 
-            "Tesseract", "Aether", "Synergy", "Cascade", "Chrono", "Stratum", "Momentum"
+        // Список случайных названий для меню
+        const randomMenuItems = [
+            "404 Error - Page Not Found", 
+            "Please Wait... Loading...", 
+            "Settings (Coming Soon)",
+            "System Alert", 
+            "Contact Support (Unavailable)", 
+            "Unavailable Feature", 
+            "Oops! Something Went Wrong", 
+            "Undefined Behavior", 
+            "Access Denied", 
+            "Download Now (But it won't work)", 
+            "Click Here (Nothing Happens)", 
+            "Emergency Shutdown", 
+            "Under Maintenance", 
+            "Try Again Later", 
+            "404 Redirect Loop"
         ];
 
-        // Функция для генерации уникальных слов в меню
+        // Функция для генерации случайных элементов в меню
         function generateMenu(parent, depth) {
             if (depth > 6) return;
-            let categoryIndex = 0;
             let categories = [];
             
-            // Генерация случайных слов для текущего уровня
+            // Генерация случайных названий для текущего уровня
             for (let i = 0; i < 5; i++) {
-                categories.push(randomWords[Math.floor(Math.random() * randomWords.length)]);
+                categories.push(randomMenuItems[Math.floor(Math.random() * randomMenuItems.length)]);
             }
             
-            // Создание элементов меню с уникальными названиями
+            // Создание элементов меню с случайными названиями
             categories.forEach(category => {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
