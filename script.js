@@ -1,4 +1,3 @@
-
 const menuLevels = [
     ["Dashboard", "Settings", "User Profile", "Notifications", "Privacy", "Help Center", "Support", "Documentation", "Tools", "Search"],
     ["Reports", "Analytics", "Integrations", "API Keys", "Security", "Billing", "Subscription", "Developers", "Logs", "System Status"],
@@ -52,7 +51,10 @@ function nextModalStep() {
     }
 }
 
-document.getElementById("about").addEventListener("click", showModal);
+document.getElementById("about").addEventListener("click", function() {
+    // Открытие новой вкладки с контентом о вас
+    window.open("about.html", "_blank");
+});
 
 document.getElementById("about").addEventListener("mouseover", function() {
     setTimeout(() => {
