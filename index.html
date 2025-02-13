@@ -83,69 +83,87 @@
             border: 1px solid #495057;
             border-radius: 5px;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+            z-index: 1000;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
     <div id="menu">
         <h3>Menu</h3>
         <input type="text" id="search" placeholder="Search...">
-        <div class="menu-item" onclick="toggleSubmenu('useful')">Useful Tools</div>
-        <div id="useful" class="submenu">
-            <a href="#">Online Calculator</a>
-            <a href="#">Task Manager</a>
-            <div class="menu-item" onclick="toggleSubmenu('deep')">Advanced Settings</div>
-            <div id="deep" class="submenu">
-                <a href="#">Performance Booster</a>
-                <a href="#">Memory Optimizer</a>
-                <div class="menu-item" onclick="toggleSubmenu('chaos')">System Core</div>
-                <div id="chaos" class="submenu">
-                    <a href="#">???</a>
-                    <a href="#">Something's wrong...</a>
-                    <a href="#">404 System Overload</a>
-                </div>
-            </div>
-        </div>
+        <div id="menu-content"></div>
     </div>
-
+    
     <div id="about">About Me</div>
     
     <div id="projects">
         <h2>Projects</h2>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Project</a>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Mysterious Link</a>
+        <a href="#">My Project 1</a>
+        <a href="#">My Project 2</a>
+        <a href="#">My Project 3</a>
+    </div>
+    
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <p id="modal-text"></p>
+        <button onclick="nextModalStep()">OK</button>
     </div>
     
     <script>
-        function toggleSubmenu(id) {
-            let submenu = document.getElementById(id);
-            if (submenu.style.display === 'block') {
-                submenu.style.display = 'none';
-            } else {
-                submenu.style.display = 'block';
+        function generateMenu(parent, depth) {
+            if (depth > 6) return;
+            for (let i = 1; i <= 10; i++) {
+                let item = document.createElement("div");
+                item.classList.add("menu-item");
+                item.innerText = `Option ${depth}.${i}`;
+                let submenu = document.createElement("div");
+                submenu.classList.add("submenu");
+                item.onclick = () => submenu.style.display = submenu.style.display === "block" ? "none" : "block";
+                parent.appendChild(item);
+                parent.appendChild(submenu);
+                generateMenu(submenu, depth + 1);
             }
         }
-
-        document.getElementById('about').addEventListener('click', function() {
-            let confirmed = confirm("Are you sure you want to enter?");
-            if (!confirmed) return;
-            confirmed = confirm("Really sure?");
-            if (!confirmed) return;
-            let answer = prompt("What is 2+2?");
-            if (answer !== "4") {
-                alert("Wrong! Try again later.");
-                return;
-            }
-            document.body.innerHTML = '<h1>Welcome to my world</h1><div id="loading-photo"></div>';
-        });
-
-        document.getElementById('search').addEventListener('input', function(event) {
-            let value = event.target.value;
-            if (value.length > 5) {
-                event.target.value = "Error";
+        generateMenu(document.getElementById("menu-content"), 1);
+        
+        let modalSteps = ["Are you sure you want to enter?", "Really sure?", "What is 2+2? (Type '4')"];
+        let modalIndex = 0;
+        function showModal() {
+            document.getElementById("overlay").style.display = "block";
+            document.getElementById("modal").style.display = "block";
+            document.getElementById("modal-text").innerText = modalSteps[modalIndex];
+        }
+        function nextModalStep() {
+            modalIndex++;
+            if (modalIndex >= modalSteps.length) {
+                document.getElementById("overlay").style.display = "none";
+                document.getElementById("modal").style.display = "none";
+                document.body.innerHTML = '<h1>Welcome to my world</h1>';
             } else {
-                event.target.value = value.split('').sort(() => 0.5 - Math.random()).join('');
+                document.getElementById("modal-text").innerText = modalSteps[modalIndex];
             }
-        });
+        }
+        document.getElementById("about").addEventListener("click", showModal);
     </script>
 </body>
 </html>
