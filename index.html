@@ -127,10 +127,27 @@
     </div>
     
     <script>
+        // Список случайных слов для меню
+        const randomWords = [
+            "Quantum", "Nebula", "Vertex", "Orbit", "Cosmic", "Binary", "Pixel", "Nexus", 
+            "Fusion", "Eclipse", "Vortex", "Prism", "Matrix", "Cipher", "Spectrum", "Pulsar", 
+            "Element", "Gravity", "Pulse", "Ion", "Nova", "Helix", "Zenith", "Solar", "Wave", 
+            "Tesseract", "Aether", "Synergy", "Cascade", "Chrono", "Stratum", "Momentum"
+        ];
+
+        // Функция для генерации уникальных слов в меню
         function generateMenu(parent, depth) {
             if (depth > 6) return;
-            let categories = ["Tools", "Settings", "Utilities", "Resources", "Shortcuts", "Configurations", "Options", "Preferences", "Admin", "Help"];
-            for (let category of categories) {
+            let categoryIndex = 0;
+            let categories = [];
+            
+            // Генерация случайных слов для текущего уровня
+            for (let i = 0; i < 5; i++) {
+                categories.push(randomWords[Math.floor(Math.random() * randomWords.length)]);
+            }
+            
+            // Создание элементов меню с уникальными названиями
+            categories.forEach(category => {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
                 item.innerText = category;
@@ -140,8 +157,9 @@
                 parent.appendChild(item);
                 parent.appendChild(submenu);
                 generateMenu(submenu, depth + 1);
-            }
+            });
         }
+
         generateMenu(document.getElementById("menu-content"), 1);
         
         let modalSteps = ["Are you sure you want to enter?", "Really sure?", "What is 2+2? (Type '4')"];
@@ -162,6 +180,7 @@
                 document.getElementById("modal-text").innerText = modalSteps[modalIndex];
             }
         }
+
         document.getElementById("about").addEventListener("click", showModal);
         document.getElementById("about").addEventListener("mouseover", function() {
             setTimeout(() => {
