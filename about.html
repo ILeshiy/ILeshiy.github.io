@@ -3,17 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>About Me</title>
     <link rel="stylesheet" href="about.css">
 </head>
 <body>
-    <div class="container">
-        <div class="loading-circle">
-            <div class="loading-overlay"></div>
-            <img src="your-photo.jpg" alt="Profile Photo">
+    <div class="content">
+        <div class="photo-container">
+            <div class="photo">
+                <!-- Ваше изображение с анимацией загрузки и пикселизацией -->
+                <div class="loading-animation">Loading...</div>
+                <img src="your-photo.jpg" alt="Your Photo" class="photo-img">
+            </div>
         </div>
-        <p class="loading-text">Loading<span class="dots">...</span></p>
-        <a class="important-button" href="https://www.youtube.com/watch?v=FHoe4CjME88" target="_blank">Что-то важное</a>
+
+        <div class="text-container">
+            <h1>Welcome to My World!</h1>
+            <p>This is some text content with infinite loading animation.</p>
+        </div>
+
+        <a href="https://www.youtube.com/watch?v=FHoe4CjME88" target="_blank" class="important-button">
+            What’s Important
+        </a>
     </div>
+
+    <script src="about.js"></script>
 </body>
 </html>
