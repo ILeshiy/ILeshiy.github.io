@@ -1,87 +1,55 @@
-/* Общие стили для контейнера */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
-
-.content {
-    width: 80%;
-    margin: 50px auto;
-    text-align: center;
-}
-
+/* Общие стили для изображения */
 .photo-container {
     position: relative;
-    margin-bottom: 30px;
+    width: 100%;
+    height: 300px; /* задайте нужную высоту для изображения */
 }
 
 .photo {
     position: relative;
-    display: inline-block;
-    width: 300px;
-    height: 300px;
-    background-color: #ddd;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Загрузка фотографии: размытие */
 .photo-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: blur(10px);
-    transition: filter 1s ease-out;
+    filter: blur(10px); /* начальный эффект размытия */
+    transition: filter 0.3s ease; /* плавный переход для размытия */
 }
 
-/* Анимация загрузки */
 .loading-animation {
     position: absolute;
-    color: #fff;
-    font-size: 20px;
-    font-weight: bold;
-    z-index: 10;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    color: white;
+    z-index: 1;
 }
 
-/* Стиль для текста */
+.loaded-text {
+    display: none; /* Изначально скрываем текст, пока не загрузится */
+}
+
 .text-container {
-    margin-top: 30px;
+    margin-top: 20px;
+    padding: 20px;
 }
 
 .loading-text {
-    color: #888;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
+    font-size: 18px;
+    color: #ccc;
 }
 
-/* Стиль для загруженного текста */
-.loaded-text {
-    opacity: 0;
-    animation: fadeIn 2s forwards;
-}
-
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-    }
-}
-
-/* Стиль кнопки */
 .important-button {
-    display: inline-block;
-    background-color: #007bff;
-    color: #fff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    display: block;
     margin-top: 20px;
-    font-size: 16px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    border-radius: 5px;
 }
 
 .important-button:hover {
