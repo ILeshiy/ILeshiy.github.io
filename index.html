@@ -1,43 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>Худшее портфолио</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
+            font-family: Comic Sans MS, sans-serif;
+            background: linear-gradient(45deg, red, yellow);
+            color: black;
+            overflow: hidden;
         }
-
-        h1 {
-            color: #333;
-            margin-top: 50px;
+        #menu {
+            position: fixed;
+            left: -250px;
+            top: 0;
+            width: 250px;
+            height: 100vh;
+            background: purple;
+            color: white;
+            padding: 20px;
+            transition: left 0.3s;
         }
-
-        p {
-            font-size: 20px;
-            color: #555;
+        #menu:hover {
+            left: 0;
         }
-
-        img {
-            margin-top: 20px;
-            width: 80%;
-            max-width: 600px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        .submenu {
+            margin-left: 20px;
+            display: none;
+        }
+        .submenu-toggle:hover + .submenu {
+            display: block;
+        }
+        #about {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            padding: 20px;
+            background: white;
+            box-shadow: 5px 5px 10px black;
+            cursor: pointer;
+        }
+        #loading-photo {
+            width: 200px;
+            height: 200px;
+            background: url('https://i.imgur.com/zW2HGn6.gif'); /* Мем заглушка */
+            background-size: cover;
+            border: 5px dashed black;
+        }
+        #projects a {
+            display: block;
+            margin-top: 10px;
         }
     </style>
 </head>
-
 <body>
-    <h1>Welcome to my website!</h1>
-    <p>Hi, I'm Alex. This is my page.</p>
-    <img src="https://cs13.pikabu.ru/post_img/big/2024/02/03/4/1706935198124525869.jpg" alt="Image">
-</body>
+    <div id="menu">
+        <h3>Меню</h3>
+        <div class="submenu-toggle">Вкладка 1</div>
+        <div class="submenu">
+            <div class="submenu-toggle">Еще вкладка</div>
+            <div class="submenu">
+                <div class="submenu-toggle">Да еще одна</div>
+                <div class="submenu">
+                    <div class="submenu-toggle">Это не конец</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="about">Обо мне (догоняй!)</div>
+    
+    <div id="projects">
+        <h2>Проекты</h2>
+        <a href="https://ru.wikipedia.org/wiki/Special:Random" target="_blank">Проект 1</a>
+        <a href="https://ru.wikipedia.org/wiki/Special:Random" target="_blank">Проект 2</a>
+    </div>
+    
+    <div id="important">
+        <h2>Самое важное</h2>
+        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Смотреть!</a>
+    </div>
+
+    <script>
+        document.getElementById('about').addEventListener('mouseover', function() {
+            this.style.top = Math.random() * 80 + 'vh';
+            this.style.left = Math.random() * 80 + 'vw';
+        });
+    </script>
+</body>
 </html>
