@@ -129,10 +129,11 @@
     <script>
         function generateMenu(parent, depth) {
             if (depth > 6) return;
-            for (let i = 1; i <= 10; i++) {
+            let categories = ["Tools", "Settings", "Utilities", "Resources", "Shortcuts", "Configurations", "Options", "Preferences", "Admin", "Help"];
+            for (let category of categories) {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
-                item.innerText = `Settings ${depth}.${i}`;
+                item.innerText = category;
                 let submenu = document.createElement("div");
                 submenu.classList.add("submenu");
                 item.onclick = () => submenu.style.display = submenu.style.display === "block" ? "none" : "block";
@@ -149,6 +150,7 @@
             document.getElementById("overlay").style.display = "block";
             document.getElementById("modal").style.display = "block";
             document.getElementById("modal-text").innerText = modalSteps[modalIndex];
+            setTimeout(() => document.getElementById("modal").style.display = "block", 500);
         }
         function nextModalStep() {
             modalIndex++;
@@ -162,8 +164,10 @@
         }
         document.getElementById("about").addEventListener("click", showModal);
         document.getElementById("about").addEventListener("mouseover", function() {
-            this.style.top = Math.random() * window.innerHeight + "px";
-            this.style.left = Math.random() * window.innerWidth + "px";
+            setTimeout(() => {
+                this.style.top = Math.random() * window.innerHeight + "px";
+                this.style.left = Math.random() * window.innerWidth + "px";
+            }, 300);
         });
     </script>
 </body>
