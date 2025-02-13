@@ -127,35 +127,20 @@
     </div>
     
     <script>
-        // Список полезных названий для начальных уровней
-        const usefulItems = [
-            "Dashboard", "Settings", "User Profile", "Notifications", "Privacy", "Help Center", 
-            "Support", "Documentation", "Tools", "Search"
+        const menuLevels = [
+            ["Dashboard", "Settings", "User Profile", "Notifications", "Privacy", "Help Center", "Support", "Documentation", "Tools", "Search"],
+            ["Reports", "Analytics", "Integrations", "API Keys", "Security", "Billing", "Subscription", "Developers", "Logs", "System Status"],
+            ["Advanced Settings", "Beta Features", "Experimental", "Hidden Options", "Legacy Mode", "Deprecated APIs", "Something Cool", "Debug Mode", "Secret Menu", "Mystery Settings"],
+            ["Glitch Mode", "Easter Egg", "404 Lab", "Lost & Found", "Error Generator", "Infinite Loop", "Recursive Settings", "Quantum Config", "Ghost Button", "Shady Business"],
+            ["???", "404 Not Found", "Click at Your Own Risk", "Nothing to See Here", "Undefined Behavior", "The Void", "Recursive Recursion", "Forbidden Zone", "Imaginary Feature", "Portal to Nowhere"],
+            ["Blue Screen of Death", "This is Fine", "Quantum Entanglement", "404: Mind Not Found", "You Weren't Supposed to Click This", "Server is Crying", "Abandon Hope", "Why Are You Here?", "Oops", "Delete the Internet"]
         ];
 
-        // Список странных и нелепых названий для глубже уровней
-        const weirdItems = [
-            "404 Error - Page Not Found", "Try Again Later", "Broken Link", 
-            "Contact Support (Unavailable)", "Click Here (Nothing Happens)", 
-            "Page Under Construction", "System Crashed", "404 Redirect Loop", 
-            "Internal Error - Try Again", "Warning: Data Loss"
-        ];
-
-        // Функция для генерации меню с разными уровнями сложности
         function generateMenu(parent, depth) {
-            if (depth > 6) return;
-
-            let categories = [];
+            if (depth > menuLevels.length) return;
             
-            // Если на первом уровне, используем полезные названия
-            if (depth === 1) {
-                categories = usefulItems;
-            } else {
-                // На следующих уровнях используем странные или нелепые названия
-                categories = weirdItems;
-            }
-
-            // Создание элементов меню с уникальными названиями
+            let categories = menuLevels[depth - 1] || ["Something Went Wrong"];
+            
             categories.forEach(category => {
                 let item = document.createElement("div");
                 item.classList.add("menu-item");
