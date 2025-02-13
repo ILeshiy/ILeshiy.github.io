@@ -7,9 +7,10 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background: linear-gradient(45deg, #f0f0f0, #dcdcdc);
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
             color: black;
-            overflow: hidden;
+            margin: 0;
+            padding: 0;
         }
         #menu {
             position: fixed;
@@ -17,27 +18,33 @@
             top: 0;
             width: 250px;
             height: 100vh;
-            background: #333;
+            background: #343a40;
             color: white;
             padding: 20px;
             overflow-y: auto;
         }
-        .submenu-toggle {
-            display: block;
-            margin-top: 10px;
-            text-decoration: none;
-            color: white;
-            background: darkred;
-            padding: 5px;
-            border-radius: 5px;
+        .menu-item {
             cursor: pointer;
+            padding: 10px;
+            background: #495057;
+            margin-top: 5px;
+            border-radius: 5px;
         }
         .submenu {
-            margin-left: 20px;
             display: none;
+            margin-left: 20px;
         }
-        .submenu-toggle:hover + .submenu {
+        .menu-item:hover {
+            background: #6c757d;
+        }
+        .submenu a {
             display: block;
+            padding: 5px;
+            color: white;
+            text-decoration: none;
+        }
+        .submenu a:hover {
+            text-decoration: underline;
         }
         #about {
             position: absolute;
@@ -45,31 +52,36 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-size: 24px;
-            padding: 20px;
-            background: white;
-            box-shadow: 5px 5px 10px black;
+            padding: 20px 40px;
+            background: #007bff;
+            color: white;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
             cursor: pointer;
+            transition: background 0.3s;
         }
-        #loading-photo {
-            width: 200px;
-            height: 200px;
-            background: url('https://i.imgur.com/zW2HGn6.gif'); /* Placeholder meme */
-            background-size: cover;
-            border: 5px dashed black;
+        #about:hover {
+            background: #0056b3;
         }
         #projects a {
             display: block;
             margin-top: 10px;
             text-decoration: none;
             color: black;
-            background: lightgray;
-            padding: 5px;
+            background: #dee2e6;
+            padding: 10px;
             border-radius: 5px;
+            text-align: center;
+        }
+        #projects a:hover {
+            background: #ced4da;
         }
         #search {
             margin-top: 20px;
             padding: 5px;
             width: 100%;
+            border: 1px solid #495057;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -77,21 +89,21 @@
     <div id="menu">
         <h3>Menu</h3>
         <input type="text" id="search" placeholder="Search...">
-        <a class="submenu-toggle" href="#">Tab 1</a>
-        <div class="submenu">
-            <a class="submenu-toggle" href="#">Another tab</a>
-            <div class="submenu">
-                <a class="submenu-toggle" href="#">Yet another one</a>
-                <div class="submenu">
-                    <a class="submenu-toggle" href="#">It never ends</a>
+        <div class="menu-item" onclick="toggleSubmenu('useful')">Useful Tools</div>
+        <div id="useful" class="submenu">
+            <a href="#">Online Calculator</a>
+            <a href="#">Task Manager</a>
+            <div class="menu-item" onclick="toggleSubmenu('deep')">Advanced Settings</div>
+            <div id="deep" class="submenu">
+                <a href="#">Performance Booster</a>
+                <a href="#">Memory Optimizer</a>
+                <div class="menu-item" onclick="toggleSubmenu('chaos')">System Core</div>
+                <div id="chaos" class="submenu">
+                    <a href="#">???</a>
+                    <a href="#">Something's wrong...</a>
+                    <a href="#">404 System Overload</a>
                 </div>
             </div>
-        </div>
-        <a class="submenu-toggle" href="#">Random stuff</a>
-        <div class="submenu">
-            <a href="#">Mystery link</a>
-            <a href="#">Absolutely nothing</a>
-            <a href="#">Hidden treasure</a>
         </div>
     </div>
 
@@ -99,20 +111,19 @@
     
     <div id="projects">
         <h2>Projects</h2>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Project 1</a>
-        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Project 2</a>
+        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Random Project</a>
+        <a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank">Mysterious Link</a>
     </div>
     
-    <div id="important">
-        <h2>Most Important</h2>
-        <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" target="_blank">Watch!</a>
-    </div>
-
     <script>
-        document.getElementById('about').addEventListener('mouseover', function() {
-            this.style.top = Math.random() * 80 + 'vh';
-            this.style.left = Math.random() * 80 + 'vw';
-        });
+        function toggleSubmenu(id) {
+            let submenu = document.getElementById(id);
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                submenu.style.display = 'block';
+            }
+        }
 
         document.getElementById('about').addEventListener('click', function() {
             let confirmed = confirm("Are you sure you want to enter?");
